@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VALKYRIE</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="logo-app.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-brand">
+                <img src="logo-app.png" alt="Logo" class="logo-app">
+                <h1>VALKYRIE</h1>
+                <img src="logo-azienda.jpg" alt="Azienda" class="logo-azienda">
+            </div>
+            <div class="header-controls">
+                <!-- Sync Indicator -->
+                <button id="btnSyncStatus" class="sync-indicator" title="Stato sincronizzazione">
+                    <span id="syncIcon" class="sync-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"></path>
+                        </svg>
+                    </span>
+                    <span id="syncLabel" class="sync-label">...</span>
+                </button>
+                <!-- Font Size Controls -->
+                <div class="font-controls">
+                    <button id="btnFontDecrease" class="btn-icon-sm" title="Riduci testo">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <span id="fontSizeLabel" class="font-size-label">100%</span>
+                    <button id="btnFontIncrease" class="btn-icon-sm" title="Ingrandisci testo">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Theme Toggle -->
+                <button id="btnThemeToggle" class="btn-icon" title="Cambia tema">
+                    <svg id="iconSun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg id="iconMoon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <!-- Settings -->
+                <button id="btnSettings" class="btn-icon" title="Impostazioni">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cerca paese o giro..." autocomplete="off">
+            <div id="searchResults" class="search-results hidden"></div>
+        </div>
+
+        <!-- Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="giri">Giri</button>
+            <button class="tab" data-tab="paesi">Paesi</button>
+            <button class="tab" data-tab="note">Note</button>
+        </nav>
+
+        <!-- Content Sections -->
+        <main class="content">
+            <!-- GIRI Section -->
+            <section id="giriSection" class="section active">
+                <div class="section-header">
+                    <div class="filters">
+                        <select id="giriSort">
+                            <option value="nome-asc">A-Z</option>
+                            <option value="nome-desc">Z-A</option>
+                            <option value="paesi-desc">Più paesi</option>
+                            <option value="paesi-asc">Meno paesi</option>
+                        </select>
+                    </div>
+                    <button id="btnAddGiro" class="btn-add">+ Nuovo Giro</button>
+                </div>
+                <div id="giriList" class="list"></div>
+            </section>
+
+            <!-- PAESI Section -->
+            <section id="paesiSection" class="section">
+                <div class="section-header">
+                    <div class="filters">
+                        <select id="paesiFilterGiro">
+                            <option value="">Tutti i giri</option>
+                        </select>
+                        <select id="paesiSort">
+                            <option value="nome-asc">A-Z</option>
+                            <option value="nome-desc">Z-A</option>
+                            <option value="giro-asc">Per giro A-Z</option>
+                        </select>
+                    </div>
+                    <button id="btnAddPaese" class="btn-add">+ Nuovo Paese</button>
+                </div>
+                <div id="paesiList" class="list"></div>
+            </section>
+
+            <!-- NOTE Section -->
+            <section id="noteSection" class="section">
+                <div class="section-header">
+                    <h2>Tutte le Note</h2>
+                </div>
+                <div id="noteList" class="list"></div>
+            </section>
+        </main>
+
+        <!-- Modals -->
+        <!-- Modal Giro -->
+        <div id="modalGiro" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalGiroTitle">Nuovo Giro</h2>
+                    <button class="btn-close" data-close="modalGiro">&times;</button>
+                </div>
+                <form id="formGiro">
+                    <input type="hidden" id="giroId">
+                    <div class="form-group">
+                        <label for="giroNome">Nome Giro *</label>
+                        <input type="text" id="giroNome" required placeholder="es. Giro Orvieto">
+                    </div>
+                    <div class="form-group">
+                        <label for="giroSpazio">Spazio / Vagone</label>
+                        <input type="text" id="giroSpazio" placeholder="es. Vagone 1, Spazio A">
+                    </div>
+                    <div class="form-group">
+                        <label for="giroColore">Colore</label>
+                        <div class="color-picker">
+                            <input type="color" id="giroColore" value="#3498db">
+                            <div class="color-presets">
+                                <button type="button" class="color-preset" data-color="#3498db" style="background:#3498db"></button>
+                                <button type="button" class="color-preset" data-color="#e74c3c" style="background:#e74c3c"></button>
+                                <button type="button" class="color-preset" data-color="#2ecc71" style="background:#2ecc71"></button>
+                                <button type="button" class="color-preset" data-color="#f39c12" style="background:#f39c12"></button>
+                                <button type="button" class="color-preset" data-color="#9b59b6" style="background:#9b59b6"></button>
+                                <button type="button" class="color-preset" data-color="#1abc9c" style="background:#1abc9c"></button>
+                                <button type="button" class="color-preset" data-color="#e91e63" style="background:#e91e63"></button>
+                                <button type="button" class="color-preset" data-color="#607d8b" style="background:#607d8b"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="giroNote">Note</label>
+                        <textarea id="giroNote" rows="3" placeholder="Note opzionali..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" data-close="modalGiro">Annulla</button>
+                        <button type="submit" class="btn-primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Paese -->
+        <div id="modalPaese" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalPaeseTitle">Nuovo Paese</h2>
+                    <button class="btn-close" data-close="modalPaese">&times;</button>
+                </div>
+                <form id="formPaese">
+                    <input type="hidden" id="paeseId">
+                    <div class="form-group">
+                        <label for="paeseNome">Nome Paese *</label>
+                        <input type="text" id="paeseNome" required placeholder="es. Orvieto">
+                    </div>
+                    <div class="form-group">
+                        <label for="paeseGiro">Giro *</label>
+                        <select id="paeseGiro" required>
+                            <option value="">Seleziona un giro...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="paeseNote">Note</label>
+                        <textarea id="paeseNote" rows="3" placeholder="Note opzionali..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" data-close="modalPaese">Annulla</button>
+                        <button type="submit" class="btn-primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Settings -->
+        <div id="modalSettings" class="modal hidden">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h2>Impostazioni</h2>
+                    <button class="btn-close" data-close="modalSettings">&times;</button>
+                </div>
+                <div class="settings-content">
+                    <!-- CLOUD SYNC - SEMPLIFICATO -->
+                    <div class="settings-section">
+                        <h3>Sincronizzazione</h3>
+                        <div class="cloud-status">
+                            <div class="cloud-info">
+                                <p id="cloudInfoText">Verifica stato...</p>
+                            </div>
+                            <div class="settings-buttons cloud-buttons">
+                                <button id="btnCloudDownload" class="btn-secondary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:middle;">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    Scarica
+                                </button>
+                                <button id="btnCloudUpload" class="btn-primary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:middle;">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    Carica
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EXPORT/IMPORT MANUALE -->
+                    <div class="settings-section">
+                        <h3>Esporta / Importa Manuale</h3>
+                        <p>Usa queste opzioni per backup o trasferimento manuale.</p>
+                        <div class="settings-buttons">
+                            <button id="btnExport" class="btn-secondary">Esporta File</button>
+                            <button id="btnImport" class="btn-secondary">Importa File</button>
+                            <input type="file" id="fileImport" accept=".json" class="hidden">
+                        </div>
+                    </div>
+
+                    <!-- DATI -->
+                    <div class="settings-section">
+                        <h3>Gestione Dati</h3>
+                        <button id="btnClearData" class="btn-danger">Cancella tutti i dati</button>
+                    </div>
+
+                    <!-- INFO -->
+                    <div class="settings-section">
+                        <h3>Info</h3>
+                        <p class="app-version">VALKYRIE v2.0</p>
+                        <p id="dataStats"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Conferma -->
+        <div id="modalConfirm" class="modal hidden">
+            <div class="modal-content modal-small">
+                <div class="modal-header">
+                    <h2 id="confirmTitle">Conferma</h2>
+                </div>
+                <p id="confirmMessage"></p>
+                <div class="form-actions">
+                    <button id="btnConfirmNo" class="btn-secondary">Annulla</button>
+                    <button id="btnConfirmYes" class="btn-danger">Conferma</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Stampa Preview -->
+        <div id="modalPrint" class="modal hidden">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h2>Anteprima Stampa</h2>
+                    <button class="btn-close" data-close="modalPrint">&times;</button>
+                </div>
+                <div id="printPreview" class="print-preview"></div>
+                <div class="form-actions">
+                    <button class="btn-secondary" data-close="modalPrint">Chiudi</button>
+                    <button id="btnDoPrint" class="btn-primary">🖨️ Stampa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast hidden"></div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registrato'))
+                .catch(err => console.log('Service Worker errore:', err));
+        }
+    </script>
+</body>
+</html>
